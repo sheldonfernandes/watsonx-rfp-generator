@@ -1,0 +1,7 @@
+chainlit==2.5.5
+langchain==0.3.25
+langchain-chroma==0.2.4
+langchain-ibm==0.3.11
+pypdf==5.5.0
+chromadb==1.0.10
+langchain_community==0.3.24
