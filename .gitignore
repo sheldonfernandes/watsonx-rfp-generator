@@ -3,3 +3,4 @@ watsonx-rfp-generator
 __pycache__
 .files
 .env
+assets/chroma_db

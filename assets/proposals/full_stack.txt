@@ -1,9 +1,9 @@
 Project Proposal: Scalable Full-Stack Web App Development Using Modern JavaScript Frameworks and Databases
 1. Formal Cover Letter
     To:
-    [Client Name]
-    [Company Name]
-    [Client Address]
+    Will Smith
+    TechRelix Techno llc
+    San Francisco, CA 98765
 
     From:
     Vorniq Technologies
@@ -15,7 +15,7 @@ Project Proposal: Scalable Full-Stack Web App Development Using Modern JavaScrip
 
     Subject: Proposal for Full-Stack Web Application Development
 
-    Dear [Client Name],
+    Dear Will Smith,
 
     Thank you for considering Vorniq Technologies for your full-stack web application development project. We are excited about the opportunity to collaborate and deliver a modern, scalable, and robust application leveraging the latest frontend and backend technologies tailored to your business needs.
 
