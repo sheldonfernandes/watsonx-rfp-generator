@@ -113,7 +113,23 @@ def get_qa_prompt():
 
         Presents a clear, actionable, and feasible approach, methodology, and timeline.
 
-        Be thorough, concise, and client-focused. Your response must maintain a formal tone, use industry-standard language, and follow the typical structure of a proposal (e.g., Executive Summary, Understanding of Requirements, Technical Approach, Implementation Plan, Team Composition, Past Experience, and Value Proposition).
+        Be thorough, concise, and client-focused. Your response must maintain a formal tone, use industry-standard language.
+
+        Strictly follow the typical structure of a proposal and include the folllowing sections in the final response:
+        Executive Summary
+        Understanding of Requirements 
+        Technical Approach 
+        Implementation Plan
+        Team Composition
+        Past Experience
+        Value Proposition
+
+        Your task also includes to extract the following sections from the input RFP document and explain each section in brief and include it in final response under section "Understanding of Requirements":
+        1. Objectives
+        2. Scope
+        3. Deliverables
+        4. Timelines
+        5. Evaluation Criteria
 
         You will be provided with the following:
         RFP input where contains he RFP section, clause, or requirements to respond to. Here is the: {input}
