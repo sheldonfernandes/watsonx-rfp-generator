@@ -58,6 +58,11 @@ These documents are parsed, cleaned, and chunked. Then, using transformer-based 
 Additionally, the foundation model is  used to simplify and breakdown the RFP into familiar elements: scope, objectives, timelines, and evaluation criteria - to provide a better understanding of the RFP. It also extracts keywords and taxonomy which can  which can be visualized (e.g., as a word cloud) to highlight key focus areas. 
 
 ## Technology implementation
+### Architecture 
+
+![architecture](./rfp-generator-architecture.png)
+
+
 ### Installation
 
 1. Create a .env file containing the following keys
