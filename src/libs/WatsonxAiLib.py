@@ -11,19 +11,19 @@ class WatsonxAiLib:
     def initialize_llm_embedding():
         params = {
             GenTextParamsMetaNames.DECODING_METHOD: "greedy",
-            GenTextParamsMetaNames.MAX_NEW_TOKENS: 1000,
+            GenTextParamsMetaNames.MAX_NEW_TOKENS: 3000,
             GenTextParamsMetaNames.MIN_NEW_TOKENS: 0,
             GenTextParamsMetaNames.REPETITION_PENALTY: 1
         }
 
         global watsonx_ai_llm
         watsonx_ai_llm = WatsonxLLM(
-            model_id="ibm/granite-3-8b-instruct",
+            model_id="ibm/granite-3-3-8b-instruct",
             url=os.getenv("WATSONX_AI_API", None),
             apikey=os.getenv("WATSONX_AI_KEY", None),
             project_id=os.getenv("WATSONX_AI_PROJECT_ID", None),
             params=params,
-            streaming=False,
+            streaming=True,
         )
         global embeddings
         embeddings = WatsonxEmbeddings(

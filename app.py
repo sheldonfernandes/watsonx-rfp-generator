@@ -8,7 +8,9 @@ from langchain_core.runnables.history import RunnableWithMessageHistory
 from src.libs.WatsonxAiLib import WatsonxAiLib
 from src.utils.AppUtil import extract_text_from_pdf, get_chroma_client, get_contextualize_q_system_prompt, get_qa_prompt
 store = {}
-
+from typing import cast
+from langchain.schema.runnable import Runnable
+from langchain.schema.runnable.config import RunnableConfig
 
 def get_session_history(session_id: str) -> BaseChatMessageHistory:
     if session_id not in store:
@@ -74,32 +76,45 @@ async def on_chat_start():
         output_messages_key="answer",
     )
 
-    response = conversational_rag_chain.invoke(
-        {"input": rfp_data},
-        config={
-            "configurable": {"session_id": "abc123"}
-        },
-    )["answer"]
+
+    # response = conversational_rag_chain.invoke(
+    #     {"input": "generate","rfp_data":rfp_data},
+    #     config={
+    #         "configurable": {"session_id": "abc123"}
+    #     },
+    # )["answer"]
 
     msg = cl.Message(
         content=f"Generated!")
     await msg.send()
 
-    await cl.Message(
-        content=response,
-    ).send()
+
+    msg = cl.Message(content="")
+
+    async for chunk in conversational_rag_chain.astream(
+           {"input": "generate","rfp_data":rfp_data},
+            config={ "configurable": {"session_id": "abc123"}}
+    ):
+        if("answer" in chunk):
+            await msg.stream_token(chunk["answer"])
+
+    await msg.send()
+
+    # await cl.Message(
+    #     content=response,
+    # ).send()
 
     cl.user_session.set("conversational_rag_chain", conversational_rag_chain)
+    cl.user_session.set("rfp_data", rfp_data)
 
 @cl.on_message
 async def on_message(message: cl.Message):
     conversational_rag_chain = cl.user_session.get("conversational_rag_chain")
-    response = conversational_rag_chain.invoke(
-        {"input": message.content},
-        config={
-            "configurable": {"session_id": "abc123"}
-        },
-    )["answer"]
-    await cl.Message(
-        content=response,
-    ).send()
+    rfp_data = cl.user_session.get("rfp_data")
+    msg = cl.Message(content="")
+    async for chunk in conversational_rag_chain.astream(
+           {"input": message.content,"rfp_data":rfp_data},
+            config={ "configurable": {"session_id": "abc123"}}
+    ):
+        if("answer" in chunk):
+            await msg.stream_token(chunk["answer"])

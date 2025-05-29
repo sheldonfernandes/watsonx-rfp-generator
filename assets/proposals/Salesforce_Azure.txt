@@ -28,7 +28,7 @@ Vorniq is a cutting-edge software company that delivers high-performance digital
 
     Subject: Proposal for Salesforce Integration with Azure Cloud
 
-    Dear [Client Name],
+    Dear John Smith,
 
     We are pleased to submit our proposal for your Salesforce to Azure Cloud integration project. At Vorniq, we specialize in delivering secure, scalable, and efficient enterprise software integrations that enable business transformation.
 
