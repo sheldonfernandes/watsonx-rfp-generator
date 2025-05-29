@@ -1,6 +1,8 @@
+assets/chroma_Db
+assets/proposals
 watsonx-rfp-generator
 .chainlit
 __pycache__
 .files
 .env
-assets/chroma_db
+update_database.py

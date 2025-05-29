@@ -54,7 +54,12 @@ async def on_chat_start():
         collection_metadata={"hnsw:space": "cosine"}
     )
 
-    retriever = vectorstore.as_retriever()
+    retriever = vectorstore.as_retriever(search_type="mmr",
+    search_kwargs={
+        "k": 5,
+        "fetch_k": 10,
+        "lambda_mult": 1
+    })
     llm = WatsonxAiLib.get_watsonx_ai_llm()
 
     contextualize_q_system_prompt = get_contextualize_q_system_prompt()
@@ -84,9 +89,8 @@ async def on_chat_start():
     #     },
     # )["answer"]
 
-    msg = cl.Message(
-        content=f"Generated!")
-    await msg.send()
+    msg.content = f"Generated!"
+    await msg.update()
 
 
     msg = cl.Message(content="")
@@ -109,9 +113,14 @@ async def on_chat_start():
 
 @cl.on_message
 async def on_message(message: cl.Message):
+    msg = cl.Message(
+        content=f"Updating...")
+    await msg.send()
     conversational_rag_chain = cl.user_session.get("conversational_rag_chain")
     rfp_data = cl.user_session.get("rfp_data")
-    msg = cl.Message(content="")
+    msg.content = f"Updated!"
+    await msg.update()
+    msg = cl.Message(content="")   
     async for chunk in conversational_rag_chain.astream(
            {"input": message.content,"rfp_data":rfp_data},
             config={ "configurable": {"session_id": "abc123"}}
