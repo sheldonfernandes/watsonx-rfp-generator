@@ -5,4 +5,3 @@ watsonx-rfp-generator
 __pycache__
 .files
 .env
-update_database.py
